@@ -255,6 +255,7 @@ extension StatusItemController {
             let providers = self.stackedMergeIconProvidersIfActive().map { [$0.top, $0.bottom] }
                 ?? self.primaryProviderForUnifiedIcon().firstPartyProvider.map { [$0] } ?? []
             self.updateMenuBarSourceDescription(for: button, providers: providers)
+            self.updateDailyBudgetStrip(for: button, providers: providers)
         }
 
         if let rows = self.stackedMergeIconProvidersIfActive(),
@@ -367,6 +368,9 @@ extension StatusItemController {
         guard let button = statusItem.button else { return false }
         if !merged {
             self.updateMenuBarSourceDescription(for: button, providers: [provider])
+        }
+        defer {
+            if !merged { self.updateDailyBudgetStrip(for: button, providers: [provider]) }
         }
         let shouldSkipRender: (String) -> Bool = { signature in
             merged ? self.shouldSkipMergedIconRender(signature)

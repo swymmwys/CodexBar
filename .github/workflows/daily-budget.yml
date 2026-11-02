@@ -1,0 +1,31 @@
+name: Daily budget fork checks
+
+on:
+  push:
+    branches: [codex/daily-budget-20261102]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: daily-budget-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  macos:
+    if: github.repository == 'swymmwys/CodexBar'
+    runs-on: macos-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Show Xcode and Swift versions
+        run: |
+          xcodebuild -version
+          swift --version
+      - name: Build app with locked dependencies
+        run: |
+          swift package resolve --force-resolved-versions
+          swift build --product CodexBar
+      - name: Test budget, settings, and account ownership
+        run: make test-fast FILTER='CodexDailyBudgetTests|CodexDailyBudgetSettingsTests|DailyBudgetStripViewTests|daily budget refuses'

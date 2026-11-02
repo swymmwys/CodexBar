@@ -2794,3 +2794,17 @@
 "Leave blank to use the default name." = "Оставьте поле пустым, чтобы использовать имя по умолчанию.";
 "Rewards" = "Награды";
 "Reward expiry" = "Срок действия наград";
+
+"Show Codex daily budget strip" = "Показывать полоску дневного бюджета Codex";
+
+"Time zone" = "Часовой пояс";
+
+"Weekdays only" = "Только по будням";
+
+"Codex daily budget" = "Дневной бюджет Codex";
+
+"Workday starts: %@:00" = "Начало рабочего дня: %@:00";
+
+"Workday ends: %@:00" = "Конец рабочего дня: %@:00";
+
+"Remaining budget for today; color forecasts the end of your workday. Uses the configured time zone and recent account usage across all models. Gray means there is not enough fresh history. Changes to the schedule start a new allocation." = "Остаток бюджета на сегодня; цвет показывает прогноз до конца рабочего дня. Учитываются выбранный часовой пояс и недавний расход аккаунта на всех моделях. Серый цвет означает нехватку свежих данных. Изменение графика создаёт новый бюджет.";

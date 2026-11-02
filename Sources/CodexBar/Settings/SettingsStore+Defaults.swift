@@ -336,6 +336,57 @@ extension SettingsStore {
         set { self.setDefault(\.menuBarPaceReservePositive, newValue, key: "menuBarPaceReservePositive") }
     }
 
+    var codexDailyBudgetEnabled: Bool {
+        get { self.defaultsState.codexDailyBudgetEnabled }
+        set { self.setDefault(\.codexDailyBudgetEnabled, newValue, key: "codexDailyBudgetEnabled") }
+    }
+
+    var codexDailyBudgetStartHour: Int {
+        get { self.defaultsState.codexDailyBudgetStartHour }
+        set {
+            self.setDefault(\.codexDailyBudgetStartHour, min(23, max(0, newValue)), key: "codexDailyBudgetStartHour")
+            if self.codexDailyBudgetEndHour <= self.codexDailyBudgetStartHour {
+                self.codexDailyBudgetEndHour = self.codexDailyBudgetStartHour + 1
+            }
+        }
+    }
+
+    var codexDailyBudgetEndHour: Int {
+        get { self.defaultsState.codexDailyBudgetEndHour }
+        set {
+            self.setDefault(
+                \.codexDailyBudgetEndHour,
+                min(24, max(self.codexDailyBudgetStartHour + 1, newValue)),
+                key: "codexDailyBudgetEndHour")
+        }
+    }
+
+    var codexDailyBudgetTimeZoneIdentifier: String {
+        get { self.defaultsState.codexDailyBudgetTimeZoneIdentifier }
+        set {
+            guard TimeZone(identifier: newValue) != nil else { return }
+            self.setDefault(\.codexDailyBudgetTimeZoneIdentifier, newValue, key: "codexDailyBudgetTimeZoneIdentifier")
+        }
+    }
+
+    var codexDailyBudgetCalendar: Calendar {
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(identifier: self.codexDailyBudgetTimeZoneIdentifier) ?? .current
+        return calendar
+    }
+
+    var codexDailyBudgetWeekdaysOnly: Bool {
+        get { self.defaultsState.codexDailyBudgetWeekdaysOnly }
+        set { self.setDefault(\.codexDailyBudgetWeekdaysOnly, newValue, key: "codexDailyBudgetWeekdaysOnly") }
+    }
+
+    var codexDailyBudgetSchedule: CodexDailyBudget.Schedule {
+        CodexDailyBudget.Schedule(
+            startHour: self.codexDailyBudgetStartHour,
+            endHour: self.codexDailyBudgetEndHour,
+            weekdaysOnly: self.codexDailyBudgetWeekdaysOnly)
+    }
+
     var menuBarColorByProvider: Bool {
         get { self.defaultsState.menuBarColorByProvider }
         set { self.setDefault(\.menuBarColorByProvider, newValue, key: "menuBarColorByProvider") }

@@ -534,6 +534,12 @@ extension SettingsStore {
         let notificationDefaults = Self.loadNotificationDefaults(userDefaults: userDefaults)
         let quotaWarnings = Self.loadQuotaWarningDefaults(userDefaults: userDefaults)
         let multiAccountMenuLayoutRaw = Self.loadMultiAccountMenuLayoutRaw(userDefaults: userDefaults)
+        let dailyBudgetStartHour = min(
+            23,
+            max(0, userDefaults.object(forKey: "codexDailyBudgetStartHour") as? Int ?? 10))
+        let dailyBudgetEndHour = min(24, max(
+            dailyBudgetStartHour + 1,
+            userDefaults.object(forKey: "codexDailyBudgetEndHour") as? Int ?? 20))
         let resolvedPreferences = Self.loadMenuBarMetricPreferences(userDefaults: userDefaults)
         let storedMenuBarLayout = Self.loadMenuBarLayout(userDefaults: userDefaults)
         let menuBarLayoutConditionals = Self.loadMenuBarLayoutConditionals(userDefaults: userDefaults)
@@ -619,6 +625,12 @@ extension SettingsStore {
             menuBarHidesCritters: userDefaults.object(forKey: "menuBarHidesCritters") as? Bool ?? false,
             menuBarColorPace: userDefaults.object(forKey: "menuBarColorPace") as? Bool ?? true,
             menuBarPaceReservePositive: userDefaults.bool(forKey: "menuBarPaceReservePositive"),
+            codexDailyBudgetEnabled: userDefaults.object(forKey: "codexDailyBudgetEnabled") as? Bool ?? true,
+            codexDailyBudgetStartHour: dailyBudgetStartHour,
+            codexDailyBudgetEndHour: dailyBudgetEndHour,
+            codexDailyBudgetTimeZoneIdentifier: userDefaults
+                .string(forKey: "codexDailyBudgetTimeZoneIdentifier") ?? "Europe/Minsk",
+            codexDailyBudgetWeekdaysOnly: userDefaults.bool(forKey: "codexDailyBudgetWeekdaysOnly"),
             menuBarColorByProvider: userDefaults.bool(forKey: "menuBarColorByProvider"),
             menuBarHighContrastOnInactiveDisplays: userDefaults.object(
                 forKey: "menuBarHighContrastOnInactiveDisplays") as? Bool ?? false,

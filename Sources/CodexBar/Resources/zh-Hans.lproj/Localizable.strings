@@ -2785,3 +2785,17 @@
 "Leave blank to use the default name." = "留空以使用默认名称。";
 "Rewards" = "奖励";
 "Reward expiry" = "奖励到期日期";
+
+"Show Codex daily budget strip" = "Show Codex daily budget strip";
+
+"Time zone" = "Time zone";
+
+"Weekdays only" = "Weekdays only";
+
+"Codex daily budget" = "Codex daily budget";
+
+"Workday starts: %@:00" = "Workday starts: %@:00";
+
+"Workday ends: %@:00" = "Workday ends: %@:00";
+
+"Remaining budget for today; color forecasts the end of your workday. Uses the configured time zone and recent account usage across all models. Gray means there is not enough fresh history. Changes to the schedule start a new allocation." = "Remaining budget for today; color forecasts the end of your workday. Uses the configured time zone and recent account usage across all models. Gray means there is not enough fresh history. Changes to the schedule start a new allocation.";

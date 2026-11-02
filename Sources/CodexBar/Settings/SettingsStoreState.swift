@@ -40,6 +40,11 @@ struct SettingsDefaultsState {
     var menuBarHidesCritters: Bool
     var menuBarColorPace: Bool
     var menuBarPaceReservePositive: Bool
+    var codexDailyBudgetEnabled: Bool
+    var codexDailyBudgetStartHour: Int
+    var codexDailyBudgetEndHour: Int
+    var codexDailyBudgetTimeZoneIdentifier: String
+    var codexDailyBudgetWeekdaysOnly: Bool
     var menuBarColorByProvider: Bool
     var menuBarHighContrastOnInactiveDisplays: Bool
     var menuBarDisplayModeRaw: String?

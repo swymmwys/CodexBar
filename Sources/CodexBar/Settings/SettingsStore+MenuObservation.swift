@@ -36,6 +36,11 @@ extension SettingsStore {
         _ = self.menuBarHidesCritters
         _ = self.menuBarColorPace
         _ = self.menuBarPaceReservePositive
+        _ = self.codexDailyBudgetTimeZoneIdentifier
+        _ = self.codexDailyBudgetEnabled
+        _ = self.codexDailyBudgetStartHour
+        _ = self.codexDailyBudgetEndHour
+        _ = self.codexDailyBudgetWeekdaysOnly
         _ = self.menuBarColorByProvider
         _ = self.menuBarHighContrastOnInactiveDisplays
         _ = self.unifiedIconSource

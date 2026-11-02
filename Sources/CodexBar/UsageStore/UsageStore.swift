@@ -150,6 +150,8 @@ final class UsageStore {
         case dashboardWeb
     }
 
+    @ObservationIgnored lazy var dailyBudgetStore = CodexDailyBudgetStore(defaults: self.settings.userDefaults)
+
     var snapshots: [ProviderInstanceID: UsageSnapshot] = [:]
     var errors: [ProviderInstanceID: String] = [:]
     var diagnostics: [ProviderInstanceID: String] = [:]

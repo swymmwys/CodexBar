@@ -75,6 +75,29 @@ struct MenuBarPane: View {
             }
 
             Section {
+                Toggle(L("Show Codex daily budget strip"), isOn: self.$settings.codexDailyBudgetEnabled)
+                if self.settings.codexDailyBudgetEnabled {
+                    Stepper(
+                        L("Workday starts: %@:00", String(self.settings.codexDailyBudgetStartHour)),
+                        value: self.$settings.codexDailyBudgetStartHour,
+                        in: 0...23)
+                    Stepper(
+                        L("Workday ends: %@:00", String(self.settings.codexDailyBudgetEndHour)),
+                        value: self.$settings.codexDailyBudgetEndHour,
+                        in: (self.settings.codexDailyBudgetStartHour + 1)...24)
+                    TextField(L("Time zone"), text: self.$settings.codexDailyBudgetTimeZoneIdentifier)
+                    Toggle(L("Weekdays only"), isOn: self.$settings.codexDailyBudgetWeekdaysOnly)
+                }
+            } header: {
+                Text(L("Codex daily budget"))
+            } footer: {
+                SettingsSectionFooter(L("Remaining budget for today; color forecasts the end of your workday. "
+                        + "Uses the configured time zone and recent account usage across all models. "
+                        + "Gray means there is not enough fresh history. "
+                        + "Changes to the schedule start a new allocation."))
+            }
+
+            Section {
                 MenuBarLayoutEditor(settings: self.settings, store: self.store)
                     .disabled(!Self.layoutEditorEnabled(for: self.settings.menuBarIconStyle))
             } header: {

@@ -10,6 +10,9 @@ extension StatusItemController {
 
         var delays: [TimeInterval] = []
         let providers = self.menuBarRefreshProviders()
+        if self.settings.codexDailyBudgetEnabled, providers.contains(.codex) {
+            delays.append(60)
+        }
         let displayMode = self.settings.menuBarDisplayMode
         let smartExhaustedActive = self.settings.menuBarShowsBrandIconWithPercent
             && self.settings.menuBarShowsResetTimeWhenExhausted
